@@ -37,6 +37,8 @@ try:
         municipio VARCHAR(255),
         evento VARCHAR(255),
         data_referencia VARCHAR(255),
+        ano INTEGER,
+        mes INTEGER,
         agente VARCHAR(255),
         arma VARCHAR(255),
         faixa_etaria VARCHAR(255),

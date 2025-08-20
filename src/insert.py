@@ -62,6 +62,15 @@ else:
             coluna_uf = 'uf' if 'uf' in df.columns.str.lower() else 'UF'
             df_ro = df[df[coluna_uf].str.upper() == estado_filtro].copy()
             
+            # Converte a coluna 'data_referencia' para o formato de data (datetime)
+            # O formato de entrada é dd-mm-yyyy, então passamos isso no parâmetro 'format'
+
+            df_ro['data_referencia'] = pd.to_datetime(df_ro['data_referencia'], format='%d-%m-%Y', errors='coerce')
+
+            # Cria as novas colunas 'ano' e 'mes' a partir da coluna 'data_referencia'
+            df_ro['ano'] = df_ro['data_referencia'].dt.year
+            df_ro['mes'] = df_ro['data_referencia'].dt.month
+            
             if not df_ro.empty:
                 print(f"  {len(df_ro)} linhas encontradas para {estado_filtro}.")
                 
