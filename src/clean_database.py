@@ -30,30 +30,13 @@ try:
     print("Verificando e criando a tabela 'dados_sinesp' se ela não existir...")
     
     # Adiciona a verificação "IF NOT EXISTS" para evitar erros se a tabela já existir
-    create_table_query = """
-    CREATE TABLE IF NOT EXISTS dados_sinesp (
-        id SERIAL PRIMARY KEY,
-        uf VARCHAR(2),
-        municipio VARCHAR(255),
-        evento VARCHAR(255),
-        data_referencia VARCHAR(255),
-        agente VARCHAR(255),
-        arma VARCHAR(255),
-        faixa_etaria VARCHAR(255),
-        feminino INTEGER,
-        masculino INTEGER,
-        nao_informado INTEGER,
-        total_vitima INTEGER,
-        total INTEGER,
-        total_peso NUMERIC(10, 3),
-        abrangencia VARCHAR(255),
-        formulario VARCHAR(255)
-    );
+    clean_table = """
+    TRUNCATE TABLE gisdb.gisadmin.dados_sinesp;
     """
-    cursor.execute(create_table_query)
+    cursor.execute(clean_table)
     
     conexao.commit()
-    print("Tabela 'dados_sinesp' verificada/criada com sucesso.")
+    print("Tabela 'dados_sinesp' TRUNCATE com sucesso.")
 
 except Exception as e:
     print(f"Erro: {e}")
